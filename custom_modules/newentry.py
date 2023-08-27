@@ -27,6 +27,8 @@ import csv
 import time
 import random
 
+
+
 #======================== CSV File creation ======================== 
 def create_csv_if_not_exists():
     file_path = "./emp_details.csv"
@@ -87,7 +89,7 @@ def gather_data():
     pos = input("Enter the Designation of Employee : ")
     salary = float(input("Enter the monthly salary of the Employee(in Rs.) : "))
     age = int(input("Enter the age of Employee(in yrs.) : "))
-    gender = input("Enter the gender of Employee(M/F/T) : ")
+    gender = input("Enter the gender of Employee(M/F/N) : ") # N for non-binary
     email = input("Enter the Email-ID of the Employee : ")
     phone = int(input("Enter the Phone Number : "))
     # allocate a new employee ID to the employee 

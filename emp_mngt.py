@@ -1,98 +1,56 @@
-'''
-Contains UI of the Employee management system and function calls of different modules
-
-    EmpId | Name | Age | Gender | Designation | Salary | Email | Phno
-    _________________________________________________________________
-          |      |     |        |             |        |       |
-
-'''
-
-# import custom_modules
+import tkinter as tk
+from tkinter import messagebox
 import os
 import time
-from custom_modules import newentry as NE
-from custom_modules import password as PW
+from custom_modules import newentry as ne
+from custom_modules import printdata as pd
+from custom_modules import update as up
+from custom_modules import password as pw
+from custom_modules import deletedata as dd
 
-def main():
-    while 1 :
+def add_new_data():
+    ne.add_new_data()
+    messagebox.showinfo("Success", "New employee data added!")
 
-        print("<<"*50 + "\n\n")
-        print("1. Enter new employee data")
-        print("2. Update exisitng data")
-        print("3. View data")
-        print("4. Exit")
-        print("\n\n" + ">>"*50)
+def update_data():
+    up.update_data()
+    messagebox.showinfo("Success", "Employee data updated!")
 
-        inp = input("Enter choice : ")
+def view_data():
+    # Create a new window for viewing data
+    view_window = tk.Toplevel(root)
 
-        # ***************************** Insert record ***************************** 
-        if inp == "1":
-            # call the function in dataentry.py
-            NE.add_new_data()
-        # ***************************** Update record ***************************** 
-        elif inp == "2":
-            # call the function in update.py
-            print("TBD")
-        # ***************************** Viewing data ***************************** 
-        elif inp == "3":
-            print("Search by category :-")
-            print("1. EmpId") # generates unique output(only 1)
-            print("2. Name") # may generate 1 or more based on pattern matching
-            print("3. Age")
-            print("4. Gender")
-            print("5. Designation")
-            print("6. Salary")
-            # no searching on email or phone
+    # Create and add widgets to the view window
+    # ...
+    # You can use labels, buttons, entry boxes, etc. to interact with the user
 
-            # ========================== Criteria selection for Viewing data ==========================
-            inp = None
-            allowedval = ["1","2","3","4","5","6"]
-            while inp not in allowedval:
-                inp = input("Select criteria to search data : ")
-                if inp not in allowedval:
-                    print("Incorrect Selection!!!Try again.")
+    # Example: Label to display instructions
+    instructions_label = tk.Label(view_window, text="Select criteria to search data:")
+    instructions_label.pack()
 
-            print("\n\n")
-            # ========================== Admin privilege for viewing personal data ==========================
-            adminprivilege = None
-            allowedval = ['y','n','Y','N']
-            while adminprivilege not in allowedval :
-                adminprivilege = input("View Employee mail and phone(y/n) : ")
-                if adminprivilege not in allowedval:
-                    print("Incorrect Input!!! Please try again.")
+    # ...
 
-            if adminprivilege == 'y':
-                # call the secret passcode and catcha functions
-                if PW.demand_password():
-                    print("\n\nAdmin Privileges granted!!!\n\n")
-                else:
-                    adminprivilege = 'n'
-                    print("\n\nSorry!!! Cannot grant admin privileges\n\n")
-            time.sleep(2)
+def delete_data():
+    dd.admin()
+    messagebox.showinfo("Deleted", "Employee data deleted!")
 
-            # Call the print function and display all rows that match the inp parameter
-            #printdatamodule.print_data(inp, adminprivilege)
+# Create the main window
+root = tk.Tk()
+root.title("Employee Management System")
 
+# Create buttons for different functionalities
+new_entry_button = tk.Button(root, text="Add New Entry", command=add_new_data)
+update_button = tk.Button(root, text="Update Data", command=update_data)
+view_button = tk.Button(root, text="View Data", command=view_data)
+delete_button = tk.Button(root, text="Delete Data", command=delete_data)
+exit_button = tk.Button(root, text="Exit", command=root.quit)
 
-        # ***************************** Exit code *****************************
-        elif inp=="4":
-            break
-        # ***************************** Incorrect selection *****************************
-        else:
-            print("Invalid Choice!!!\n\n Refreshing Page")
+# Layout the buttons using grid
+new_entry_button.grid(row=0, column=0)
+update_button.grid(row=0, column=1)
+view_button.grid(row=1, column=0)
+delete_button.grid(row=1, column=1)
+exit_button.grid(row=2, columnspan=2)
 
-        # ~~~~~~~~~~~ REFRESH PAGE ~~~~~~~~~~~~~
-        os.system("cls")
-
-    # if someone exits loop breaks then function returns to caller
-    return
-
-
-
-
-
-if __name__ == "__main__":
-    main()
-    # End of session
-    time.sleep(2)
-    print("\n"*5 + "~"*50 + "\nProgram Terminated. Changes Saved!\n"+ "~"*50)
+# Start the GUI event loop
+root.mainloop()
