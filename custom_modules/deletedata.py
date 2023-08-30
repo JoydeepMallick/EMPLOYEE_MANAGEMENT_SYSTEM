@@ -1,3 +1,15 @@
+"""
+Writing into the emp_details.csv file stored within main folder
+
+Functions defined below :-
+
+    admin()
+    delete_data()
+    --------------------------
+
+
+"""
+
 import csv
 import time
 import pandas as pd
@@ -9,6 +21,16 @@ PASSWORD='admin'
 
 # ************* THis function is used for user and password verification ******************
 def admin():
+
+    '''
+        This function "admin()" prompts the user to enter an admin user ID and password. If the user 
+        enters the correct user ID and password, the function calls another function called 
+        delete_data() to delete a column. If the user enters an incorrect user ID or password, 
+        the function prints an error message and decrements a counter for the number of tries 
+        remaining. The function repeats this process until either the correct user ID and 
+        password are entered or there are no more tries remaining.
+
+    '''
     # there will be 3 trail for password verification
     tries_left=3
 
@@ -43,6 +65,16 @@ def admin():
 
 #****************** MAIN DELETE FUNCTION ********************
 def delete_data():
+
+    '''
+        This function "delete_data()" reads a CSV file called emp_details.csv into a pandas DataFrame. 
+        It then prompts the user to enter an employee ID to delete. If the DataFrame does not contain 
+        any rows with the specified ID, the function prints an error message. If the DataFrame contains 
+        one or more rows with the specified ID, the function removes those rows from the DataFrame and 
+        saves the updated DataFrame back to the CSV file. Finally, the function prints a message 
+        indicating that the employee was deleted successfully.
+
+    '''
     # First we store the dataframe in df
     df=pd.read_csv('emp_details.csv')
 

@@ -17,17 +17,23 @@ from custom_modules import password as PW
 from custom_modules import deletedata as DD
 
 
-
+banner = r'''
+        ╔═╗╔╦╗╔═╗╦  ╔═╗╦ ╦╔═╗╔═╗      ╔╦╗╔═╗╔╗╔╔═╗╔═╗╔═╗╔╦╗╔═╗╔╗╔╔╦╗      ╔═╗╦ ╦╔═╗╔╦╗╔═╗╔╦╗
+        ║╣ ║║║╠═╝║  ║ ║╚╦╝║╣ ║╣       ║║║╠═╣║║║╠═╣║ ╦║╣ ║║║║╣ ║║║ ║       ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
+        ╚═╝╩ ╩╩  ╩═╝╚═╝ ╩ ╚═╝╚═╝      ╩ ╩╩ ╩╝╚╝╩ ╩╚═╝╚═╝╩ ╩╚═╝╝╚╝ ╩       ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
+'''
 
 def main():
     while 1 :
 
+        print(banner)
+
         print("<<"*50 + "\n\n")
-        print("1. Enter new employee data")
-        print("2. Update existing data")
-        print("3. View data")
-        print("4. Delete data")
-        print("5. Exit")
+        print("\t\t1. Enter new employee data")
+        print("\t\t2. Update existing data")
+        print("\t\t3. View data")
+        print("\t\t4. Delete data")
+        print("\t\t5. Exit")
         print("\n\n" + ">>"*50)
 
         inp = input("Enter choice : ")
@@ -77,7 +83,7 @@ def main():
             # Finally call the print function 
             PD.printdata(inp, adminprivilege)
 
-            time.sleep(5)
+            tmp = input("\n\n\nPress Enter to exit...")
 
         # ***************************** Delete data code **********************
 

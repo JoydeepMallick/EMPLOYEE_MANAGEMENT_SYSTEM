@@ -11,7 +11,6 @@ functions present :-
 ***Only 3 tries given to user for captcha and unlimited refresh given to user else  user FAILS test.
 ***Only 3 tries allowed and at the same time must pass the captcha test
 
-TODO
 ====
 
 * Hide the user entered password if possible later
@@ -23,6 +22,14 @@ import random
 # ========================= Generate captcha image ==========================
 
 def generate_captcha_img():
+
+    '''
+        This function "generate_captcha_image" generates a random 4-digit number and 
+        displays it in a 7-segmented display format. The function uses a dictionary called 
+        numdict to map each digit to its corresponding 7-segmented display pattern. The function 
+        then returns the random number generated.
+
+    '''
     # generate a random 4 digit number
     r = random.randint(1000, 9999)
     print("\nEnter the captcha carefully(for security reasons) :-\n")
@@ -53,6 +60,16 @@ def generate_captcha_img():
 
 # ========================= User entry function for visible captcha =========================
 def user_entry(num):
+
+    '''
+        This function "user_entry" prompts the user to enter a captcha shown on the screen. The function allows 
+        the user to refresh the captcha by entering ‘r’ or ‘R’. The function then checks if the user’s 
+        input is a valid integer. If the input is valid, the function checks if it matches the actual 
+        answer. If it does, the function returns True. If it does not, the function decrements a counter 
+        for the number of tries remaining and repeats the process. If there are no more tries remaining, the 
+        function returns False.
+
+    '''
     actual_ans = num
     # max three tries allowed for each refresh(unlimited refresh)
     tries_left = 3
@@ -85,6 +102,16 @@ def user_entry(num):
 #======================== MAIN CAPTCHA FUNCTION =======================
 
 def captcha():
+
+    '''
+        The captcha() function generates a random 4-digit number and displays it in a 7-segmented display format. 
+        It then prompts the user to enter the displayed value. The function allows the user to refresh the captcha 
+        by entering ‘r’ or ‘R’. The function then checks if the user’s input is a valid integer. If the input is 
+        valid, the function checks if it matches the actual answer. If it does, the function returns True. If it 
+        does not, the function decrements a counter for the number of tries remaining and repeats the process. If 
+        there are no more tries remaining, the function returns False.
+
+    '''
     # generate the image
     ans_to_captcha = generate_captcha_img()
 
@@ -105,6 +132,16 @@ PASSWORD = "admin"
 
 # ***************************** DEMAND PASSWORD FROM USER *******************************
 def demand_password():
+
+    '''
+        The demand_password() function prompts the user to enter a password. If the user enters 
+        the correct password, the function calls another function called captcha() to generate a captcha. 
+        If the user enters an incorrect password, the function prints an error message and decrements a 
+        counter for the number of tries remaining. The function repeats this process until either the 
+        correct password is entered or there are no more tries remaining. If there are no more tries remaining, 
+        the function returns False.
+
+    '''
     tries_left = 3
     while tries_left:
         password = input("Enter the password : ")
