@@ -3,65 +3,19 @@ Writing into the emp_details.csv file stored within main folder
 
 Functions defined below :-
 
-    admin()
+    
     delete_data()
     --------------------------
 
 
 """
 
-import csv
+
 import time
 import pandas as pd
 
 # user id and password
-USERID="BCREC"
-PASSWORD='admin'
 
-
-# ************* THis function is used for user and password verification ******************
-def admin():
-
-    '''
-        This function "admin()" prompts the user to enter an admin user ID and password. If the user 
-        enters the correct user ID and password, the function calls another function called 
-        delete_data() to delete a column. If the user enters an incorrect user ID or password, 
-        the function prints an error message and decrements a counter for the number of tries 
-        remaining. The function repeats this process until either the correct user ID and 
-        password are entered or there are no more tries remaining.
-
-    '''
-    # there will be 3 trail for password verification
-    tries_left=3
-
-    while tries_left:
-
-        # give the user input for userid and password
-        userid=input("Enter admin UserID : ")
-        user=input("Enter admin password : ")
-
-        # If the user id and password is correct then it will call delete function to delete the Column
-        if user==PASSWORD and userid==USERID:
-            print("Permission Granted!!!!!")
-            time.sleep(1)
-            # Here we call the delete_data function.
-            delete_data()
-            time.sleep(2)
-            break
-
-        # the next three if condition for either wrong userid or wrong password
-
-        if user!=PASSWORD and userid==USERID:
-            print("Wrong Password !!!!!")
-
-        if user==PASSWORD and userid!=USERID:
-            print("Wrong userID !!!!!")
-
-        if user!=PASSWORD and userid!=USERID:
-            print("Wrong userID and wrong Password  !!!!!")
-        # here we decrease the tries_left variable
-        tries_left-=1
-        print("Tries left : ",tries_left)
 
 #****************** MAIN DELETE FUNCTION ********************
 def delete_data():
@@ -97,5 +51,5 @@ def delete_data():
             df.to_csv('emp_details.csv',index=False)
 
             print("\n\nDeleted Employee ID no. "+id+" Sucessfully.")
-            time.sleep(2);
+            time.sleep(2)
             break

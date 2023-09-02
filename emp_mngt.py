@@ -5,11 +5,16 @@ Contains UI of the Employee management system and function calls of different mo
     _________________________________________________________________
           |      |     |        |             |        |       |
 
+
+UserID :- admin 
+Password :- BCREC
+
 '''
 
 # import custom_modules
 import os
 import time
+import msvcrt # only exclusive for windows users
 from custom_modules import newentry as NE
 from custom_modules import printdata as PD
 from custom_modules import update as UP
@@ -22,6 +27,25 @@ banner = r'''
         ║╣ ║║║╠═╝║  ║ ║╚╦╝║╣ ║╣       ║║║╠═╣║║║╠═╣║ ╦║╣ ║║║║╣ ║║║ ║       ╚═╗╚╦╝╚═╗ ║ ║╣ ║║║
         ╚═╝╩ ╩╩  ╩═╝╚═╝ ╩ ╚═╝╚═╝      ╩ ╩╩ ╩╝╚╝╩ ╩╚═╝╚═╝╩ ╩╚═╝╝╚╝ ╩       ╚═╝ ╩ ╚═╝ ╩ ╚═╝╩ ╩
 '''
+
+# Hiding password entry on screen
+def custom_input(prompt):
+    print(prompt, end="", flush=True)
+    input_string = ""
+    while True:
+        char = msvcrt.getch().decode('utf-8')  # Get a single character without printing it
+        if char == '\r' or char == '\n':
+            print("")  # Print a newline when Enter is pressed
+            break
+        elif char == '\b':
+            if input_string:
+                input_string = input_string[:-1]  # Remove the last character
+                print("\b \b", end="", flush=True)  # Clear the last character on the screen
+        else:
+            input_string += char
+            print("*", end="", flush=True)  # Print an asterisk for each character
+    return input_string
+
 
 def main():
     while 1 :
@@ -89,7 +113,7 @@ def main():
 
         elif inp=="4":
             # first verify as admin then delete as per userID provided
-            DD.admin()
+            DD.delete_data()
 
         # ***************************** Exit code *****************************
         elif inp=="5":
@@ -103,12 +127,50 @@ def main():
     # if someone exits loop breaks then function returns to caller
     return
 
-
-
-
+# dictonary of the userid and password (admin,manager,employee)
+users = {'admin': 'BCREC', 'manager': 'BCREC1', 'employee': 'BCREC2'}
 
 if __name__ == "__main__":
-    main()
+
+    print(banner)
+
+    print("<<"*50 + "\n\n")
+
+    tries_left=3
+
+    while tries_left:
+
+        # give the user input for userid and password
+        userid=input("Enter admin UserID : ")
+        password=custom_input("Enter admin password: ")
+
+        # If the user id and password is correct then it will call delete function to delete the Column
+        if userid in users and users[userid] == password: 
+            print("Permission Granted!!!!!")
+            print("Login successful!")
+            time.sleep(2)
+
+            os.system("cls")
+            # Here we call the main function.
+            # ***************** MAIN FUNCTION *****************
+            main()
+
+            time.sleep(2)
+            break
+
+        # the next three if condition for either wrong userid or wrong password
+
+        else:
+            print("Invalid username or password. Please try again.") 
+        # here we decrease the tries_left variable
+        tries_left-=1
+        print("Tries left : ",tries_left)
+
+    
+    if tries_left==0:
+        time.sleep(2)
+        
+        print("\n\nSorry you gave wrong userid and password thrice. So application access denied!") 
     # End of session
     time.sleep(2)
     print("\n"*5 + "~"*50 + "\nProgram Terminated. Changes Saved!\n"+ "~"*50)
