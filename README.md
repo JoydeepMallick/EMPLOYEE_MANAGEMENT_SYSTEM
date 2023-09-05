@@ -45,7 +45,7 @@ This Employee Management System can be further improved with additional features
 
 1. ~~Deletion: Implement the ability to remove employees from the system.~~
 2. Data Validation: Add validation checks to ensure correct data entry.
-3. Password Protection: Secure the system with login credentials for authorized access.
-4. Reports: Generate reports based on various parameters such as salary, age, or gender.
+3. ~~Password Protection: Secure the system with login credentials for authorized access.~~
+4. ~~Reports: Generate reports based on various parameters such as salary, age, or gender.~~
 
 Feel free to customize and expand this Employee Management System to suit your specific requirements. Happy coding! 🚀
